@@ -6,18 +6,13 @@ const SpeechRecognitionEvent =
     window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
 
-const colors = [
-    "aqua",
-    "azure",
-    "beige",
-    "bisque",
-    "black",
-    "blue",
-    "brown",
-    "chocolate",
-    "coral" /* … */,
+const turns = [
+    "trái",
+    "phải",
+    "lên",
+    "xuống",
 ];
-const grammar = `#JSGF V1.0; grammar colors; public <color> = ${colors.join(
+const grammar = `#JSGF V1.0; grammar turns; public <turn> = ${turns.join(
     " | ",
 )};`;
 
@@ -29,7 +24,7 @@ speechRecognitionList.addFromString(grammar, 1);
 
 recognition.grammars = speechRecognitionList;
 recognition.continuous = false;
-recognition.lang = "en-US";
+recognition.lang = "vi-VN";
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
@@ -37,24 +32,19 @@ const diagnostic = document.querySelector(".output");
 const bg = document.querySelector("html");
 const hints = document.querySelector(".hints");
 
-let colorHTML = "";
-colors.forEach((color, i) => {
-    console.log(color, i);
-    colorHTML += `<span style="background-color:${color};"> ${color} </span>`;
-});
-hints.innerHTML = `Tap or click then say a color to change the background color of the app. Try ${colorHTML}.`;
 
-document.body.onclick = () => {
+const button = document.querySelector("#button");
+button.onclick = () => {
     recognition.start();
-    console.log("Ready to receive a color command.");
+    console.log("Ready to receive a turn command.");
 };
 
 
 recognition.onresult = (event) => {
-    const color = event.results[0][0].transcript;
-    diagnostic.textContent = `Result received: ${color}.`;
-    bg.style.backgroundColor = color;
-    console.log(`Confidence: ${event.results[0][0].confidence}`);
+    const turn = event.results[0][0].transcript;
+    diagnostic.textContent = `Result received: ${turn}.`;
+    // bg.style.backgroundColor = turn;
+    // console.log(`Confidence: ${event.results[0][0].confidence}`);
 };
 
 
