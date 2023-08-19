@@ -7,10 +7,10 @@ const SpeechRecognitionEvent =
 
 
 const turns = [
-    "trái",
-    "phải",
-    "lên",
-    "xuống",
+    "left",
+    "right",
+    "up",
+    "down",
 ];
 const grammar = `#JSGF V1.0; grammar turns; public <turn> = ${turns.join(
     " | ",
@@ -24,13 +24,12 @@ speechRecognitionList.addFromString(grammar, 1);
 
 recognition.grammars = speechRecognitionList;
 recognition.continuous = false;
-recognition.lang = "vi-VN";
+recognition.lang = "en-US";
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
 const diagnostic = document.querySelector(".output");
 const bg = document.querySelector("html");
-
 
 
 const button = document.querySelector("#button");
