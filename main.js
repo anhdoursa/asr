@@ -30,7 +30,7 @@ recognition.maxAlternatives = 1;
 
 const diagnostic = document.querySelector(".output");
 const bg = document.querySelector("html");
-const hints = document.querySelector(".hints");
+
 
 
 const button = document.querySelector("#button");
